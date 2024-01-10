@@ -4,10 +4,10 @@
 - [Bootstrapping](#1.Bootstrapping)
 - [Bagging](#2.Bagging)
 - [Boosting](#3.Boosting)
-- [Types of Boosting](#Types_of_Boosting)
-- [Benefits of Boosting](#Benefits_of_Boosting)
-- [Challenges of Boosting](#Challenges_of_Boosting)
-- [XGBoosting vs Random Forest](#XGBoosting_vs_RandomForest)
+- [Types of Boosting](#Types-of-Boosting)
+- [Benefits of Boosting](#Benefits-of-Boosting)
+- [Challenges of Boosting](#Challenges-of-Boosting)
+- [XGBoosting vs Random Forest](#XGBoosting-vs-RandomForest)
 
   
 ## 1.Bootstrapping
