@@ -1,13 +1,13 @@
 # Bootstrapping-and-Boosting
 
 ## Table of Contents
-- [Bootstrapping](#1.Bootstrapping)
-- [Bagging](#2.Bagging)
-- [Boosting](#3.Boosting)
-- [Types of Boosting](#Types-of-Boosting)
-- [Benefits of Boosting](#Benefits-of-Boosting)
-- [Challenges of Boosting](#Challenges-of-Boosting)
-- [XGBoosting vs Random Forest](#XGBoosting-vs-RandomForest)
+- [Bootstrapping](#bootstrapping)
+- [Bagging](#bagging)
+- [Boosting](#boosting)
+- [Types of Boosting](#types-of-boosting)
+- [Benefits of Boosting](#benefits-of-boosting)
+- [Challenges of Boosting](#challenges-of-boosting)
+- [XGBoosting vs Random Forest](#xgboosting-vs-randomforest)
 
   
 ## 1.Bootstrapping
