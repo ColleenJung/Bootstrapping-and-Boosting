@@ -39,11 +39,13 @@ Adaboost works by **weighting incorrectly classified** instances more heavily so
 The final prediction is obtained by combining the weighted predictions of each weak learner.
 
 **2.Gradient Boosting**
+
 <img width="640" alt="Screenshot 2024-01-09 at 11 15 39 PM" src="https://github.com/ColleenJung/Bootstrapping-and-Boosting/assets/119357849/8d8932cf-ad11-41f2-9534-d4fc51b2ca7a">
 
 New models are added to correct the errors made by existing models, using gradient descent to minimize the loss function, making it effective for both regression and classification tasks.
 
 **3.XGBoost (Extreme Gradient Boosting)**
+
 <img width="605" alt="Screenshot 2024-01-09 at 11 12 44 PM" src="https://github.com/ColleenJung/Bootstrapping-and-Boosting/assets/119357849/5020adb0-f142-4508-9bc0-e9c4278e48a4">
 
 XGBoost is an optimized and more efficient implementation of gradient boosting, designed for speed and performance, which provides support for handling missing data, regularization to avoid overfitting, and can be parallelized across clusters.
