@@ -31,6 +31,7 @@ Boosting algorithms work on the idea of first building a model on the training d
 ## Types of Boosting
 
 **1.AdaBoost (Adaptive Boosting)**
+
 <img width="687" alt="Screenshot 2024-01-09 at 11 19 37 PM" src="https://github.com/ColleenJung/Bootstrapping-and-Boosting/assets/119357849/9373ec08-3856-4d6c-8344-a38605b2ef18">
 
 It works by training a sequence of **weak learners**, where each learner focuses on correcting the **mistakes** made by **its predecessor**. 
