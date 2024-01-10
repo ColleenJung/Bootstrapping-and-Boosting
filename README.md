@@ -1,16 +1,16 @@
 # Bootstrapping-and-Boosting
 
 ## Table of Contents
-- [Bootstrapping](#Bootstrapping)
-- [Bagging](#Bagging)
-- [Boosting](#Boosting)
-- [Types of Boosting](#TypesofBoosting)
-- [Benefits of Boosting](#BenefitsofBoosting)
-- [Challenges of Boosting](#ChallengesofBoosting)
-- [XGBoosting vs Random Forest](#XGBoostingvsRandomForest)
+- [Bootstrapping](#1.Bootstrapping)
+- [Bagging](#2.Bagging)
+- [Boosting](#3.Boosting)
+- [Types of Boosting](#Types_of_Boosting)
+- [Benefits of Boosting](#Benefits_of_Boosting)
+- [Challenges of Boosting](#Challenges_of_Boosting)
+- [XGBoosting vs Random Forest](#XGBoosting_vs_RandomForest)
 
   
-## 1. Bootstrapping
+## 1.Bootstrapping
 <img width="545" alt="Screenshot 2024-01-09 at 10 33 22 PM" src="https://github.com/ColleenJung/Bootstrapping-and-Boosting/assets/119357849/0fc1acb6-84cb-41d1-98af-a386e0985042">
 
 This is a resampling method that uses random sampling **with replacement**.
