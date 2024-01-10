@@ -69,7 +69,7 @@ You might also find it challenging to use boosting for real-time implementation 
 <img width="546" alt="Screenshot 2024-01-10 at 2 56 59 PM" src="https://github.com/ColleenJung/Bootstrapping-and-Boosting/assets/119357849/c2ae73fd-0fe8-4301-9c63-ecd767348a6a">
 
 
-**Random Forest**
+## Random Forest
 
 <img width="596" alt="Screenshot 2024-01-10 at 2 38 30 PM" src="https://github.com/ColleenJung/Bootstrapping-and-Boosting/assets/119357849/4539ae9d-03be-4af2-bc0c-d21ee57d8c31">
 
@@ -81,7 +81,7 @@ A team of desicion trees each having slightly different specialitues, and the fi
 
 **2. Handles Large Datasets and Feature Spaces:** Random Forest can easily handle datasets with a high dimensionality (many features) and a large number of data points, making it a good choice for complex datasets.
 
-**XGBoost**
+## XGBoost
 
 XGBoost, which stands for **“eXtreme Gradient Boosting,”** is an advanced implementation of the gradient boosting algorithm. Gradient boosting is a machine learning technique where the main idea is to **combine** many simple models, also known as **“weak learners,”** to create an ensemble model that is better at prediction.
 
