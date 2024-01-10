@@ -10,20 +10,20 @@
 - [XGBoosting vs Random Forest](#xgboosting-vs-randomforest)
 
   
-## 1.Bootstrapping
+## Bootstrapping
 <img width="545" alt="Screenshot 2024-01-09 at 10 33 22 PM" src="https://github.com/ColleenJung/Bootstrapping-and-Boosting/assets/119357849/0fc1acb6-84cb-41d1-98af-a386e0985042">
 
 This is a resampling method that uses random sampling **with replacement**.
 
 
-## 2. Bagging (**B**tstrap+**agg**regating )
+## Bagging (**B**tstrap+**agg**regating )
 <img width="599" alt="Screenshot 2024-01-09 at 10 33 35 PM" src="https://github.com/ColleenJung/Bootstrapping-and-Boosting/assets/119357849/a540bf6b-d5b7-4510-86f8-261bf2fefcde">
 
 Bagging, which is short for bootstrap aggregating, is an ensemble learning technique that helps to improve the performance and accuracy of machine learning algorithms.
 <img width="731" alt="Screenshot 2024-01-09 at 10 38 02 PM" src="https://github.com/ColleenJung/Bootstrapping-and-Boosting/assets/119357849/771d4afa-80b4-49f4-9d18-cd00403b71a2">
 
 
-## 3. Boosting
+## Boosting
 <img width="617" alt="Screenshot 2024-01-09 at 10 34 20 PM" src="https://github.com/ColleenJung/Bootstrapping-and-Boosting/assets/119357849/05f9d08f-7a97-4111-8da3-6df3171e9079">
 
 Boosting algorithms work on the idea of first building a model on the training dataset and then building a second model to **correct the faults in the first model**. This technique is **repeated** until the mistakes are reduced and the dataset is accurately predicted.
