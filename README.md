@@ -16,7 +16,7 @@
 This is a resampling method that uses random sampling **with replacement**.
 
 
-## 2. Bagging (**B**tstrap+**agg**regating )
+## 2. Bagging (**B**ootstrap+**agg**regating )
 <img width="599" alt="Screenshot 2024-01-09 at 10 33 35 PM" src="https://github.com/ColleenJung/Bootstrapping-and-Boosting/assets/119357849/a540bf6b-d5b7-4510-86f8-261bf2fefcde">
 
 Bagging, which is short for bootstrap aggregating, is an ensemble learning technique that helps to improve the performance and accuracy of machine learning algorithms.
@@ -65,3 +65,43 @@ You might also find it challenging to use boosting for real-time implementation 
 
 
 ## XGBoosting vs Random Forest
+
+<img width="546" alt="Screenshot 2024-01-10 at 2 56 59 PM" src="https://github.com/ColleenJung/Bootstrapping-and-Boosting/assets/119357849/c2ae73fd-0fe8-4301-9c63-ecd767348a6a">
+
+
+**Random Forest**
+
+<img width="596" alt="Screenshot 2024-01-10 at 2 38 30 PM" src="https://github.com/ColleenJung/Bootstrapping-and-Boosting/assets/119357849/4539ae9d-03be-4af2-bc0c-d21ee57d8c31">
+
+A team of desicion trees each having slightly different specialitues, and the final prediction is like a team decision made after cosidering everyone's input.
+
+**Advantages**
+
+**1. Robust to Overfitting:** Due to the random nature of the Random Forest (random sampling of data points and features), the model is less prone to overfitting than a single decision tree. 
+
+**2. Handles Large Datasets and Feature Spaces:** Random Forest can easily handle datasets with a high dimensionality (many features) and a large number of data points, making it a good choice for complex datasets.
+
+**XGBoost**
+
+XGBoost, which stands for **“eXtreme Gradient Boosting,”** is an advanced implementation of the gradient boosting algorithm. Gradient boosting is a machine learning technique where the main idea is to **combine** many simple models, also known as **“weak learners,”** to create an ensemble model that is better at prediction.
+
+The **“Gradient”** in “Gradient Boosting” refers to the fact that the algorithm uses gradient descent optimization to minimize the errors in the predictions. It’s a mathematical way of saying: **“find the best direction to reduce the error.”**
+
+**Advantages**
+
+**1. Performance:**  XGBoost can handle a variety of data types, including **numeric, categorical, and ordinal data**
+
+**Disadvantages**
+
+**1. Prone to Overfitting if Not Properly Tuned:** Although XGBoost has regularization parameters to control overfitting, it can still be prone to overfitting if not properly tuned. Careful tuning of parameters such as the learning rate, the depth of the tree, and the number of trees is necessary.
+
+## When to Use Which Algorithm
+
+1. Use **Decision Trees** when interpretability is highly important. Decision trees are also good when you have categorical data or when you need a quick and simple model.
+
+2. Use **Random Forests** when you need a better balance between interpretability and accuracy. Random Forests are also good when you have large datasets with many features.
+
+3. Use **XGBoost** when your primary concern is performance and you have the resources to tune the model properly. XGBoost is also effective when you have a mix of categorical and numerical features, and when you have a large volume of data.
+
+
+   
