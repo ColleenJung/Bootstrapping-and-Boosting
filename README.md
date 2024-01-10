@@ -1,5 +1,15 @@
 # Bootstrapping-and-Boosting
 
+## Table of Contents
+- [Bootstrapping](#Bootstrapping)
+- [Bagging](#Bagging)
+- [Boosting](#Boosting)
+- [Types of Boosting](#Types of Boosting)
+- [Benefits of Boosting](#Benefits of Boosting)
+- [Challenges of Boosting](#Challenges of Boosting)
+- [XGBoosting vs Random Forest](#XGBoosting vs Random Forest)
+
+  
 ## 1. Bootstrapping
 <img width="545" alt="Screenshot 2024-01-09 at 10 33 22 PM" src="https://github.com/ColleenJung/Bootstrapping-and-Boosting/assets/119357849/0fc1acb6-84cb-41d1-98af-a386e0985042">
 
