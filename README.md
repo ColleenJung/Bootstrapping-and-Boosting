@@ -8,6 +8,7 @@
 - [Benefits of Boosting](#benefits-of-boosting)
 - [Challenges of Boosting](#challenges-of-boosting)
 - [XGBoosting vs Random Forest](#xgboosting-vs-randomforest)
+- [Fitting and Tuning Random Forests](#Fitting-and-Tuning-Random-Forests)
 
   
 ## 1. Bootstrapping
@@ -101,7 +102,47 @@ The **“Gradient”** in “Gradient Boosting” refers to the fact that the al
 
 2. Use **Random Forests** when you need a better balance between interpretability and accuracy. Random Forests are also good when you have large datasets with many features.
 
-3. Use **XGBoost** when your primary concern is performance and you have the resources to tune the model properly. XGBoost is also effective when you have a mix of categorical and numerical features, and when you have a large volume of data.
+4. Use **XGBoost** when your primary concern is performance and you have the resources to tune the model properly. XGBoost is also effective when you have a mix of categorical and numerical features, and when you have a large volume of data.
+
+## Fitting and Tuning Random Forests
+  
+  <img width="556" alt="Screenshot 2024-01-21 at 4 34 30 PM" src="https://github.com/ColleenJung/Bootstrapping-and-Boosting/assets/119357849/bcec3243-3380-4a56-a9b1-367a3b2276fc">
 
 
-   
+**R package**
+- 'ranger': A Fast Implementation of Random Forests
+- 'caret' : short for Classification And REgression Training
+  
+<img width="572" alt="Screenshot 2024-01-21 at 4 37 38 PM" src="https://github.com/ColleenJung/Bootstrapping-and-Boosting/assets/119357849/0e8d27c1-0c67-4e0a-9a01-954957eac528">
+
+<img width="561" alt="Screenshot 2024-01-21 at 4 38 01 PM" src="https://github.com/ColleenJung/Bootstrapping-and-Boosting/assets/119357849/ae3ccf20-738f-45ed-baef-bea6e4c4a993">
+
+The best tuning parameter is 'mtry'=4, 'min.node.size'=10.
+
+Provide a statement to explain why we want to consider respect.unordered.factors = "partition", and how is it different from its default value.
+
+ 'respect.unordered.factors' = TRUE or FALSE should be based on the understanding of the data and the specific requirements of your analysis
+
+- When this parameter(respect.unordered.factors = "partition") is set to FALSE by default, 'ranger' package treats all string-valued variables as if they were ordered. 
+This means it doesn't spend time converting these categorical variables into dummy or indicator variables, treating them as numeric variables. 
+
+- This default setting works well when the categorical variables indeed have an ordered relationship with the outcome. However, treating these variables as ordered(categorical variables) might lead to a loss of information and potentially weaker model performance.
+
+- Alternative (respect.unordered.factors = TRUE):tells ranger to handle unordered factors properly by creating dummy variables. This can be more computationally expensive but allows the model to capture more complex relationships between categorical variables and the outcome. 
+
+- It's particularly important when the order of factor levels doesn't have a meaningful relationship with the response variable.
+
+- In this model, given that 'cp', 'thal' doesn't have a meaningful relationship with the outcome 'num', it might be more appropriate to set respect.unordered.factors = TRUE. This will allow the ranger model to more accurately capture the relationship between these categorical variables and the outcome, though at the cost of increased computational complexity.
+
+
+The plot is in U shape, the MSE is the smallest when nodesize=20
+
+**Decreasing MSE with Increasing Nodesize (up to a point):**
+
+If the plot shows a decrease in MSE as nodesize increases initially, it suggests that larger nodesize values are helping to reduce overfitting. Smaller nodesize allows trees to grow more complex and can lead to trees that are overly tailored to the training data, capturing noise rather than the underlying pattern.
+ 
+**Increasing MSE with Further Increase in Nodesize:**
+
+Beyond a certain point, if the MSE starts to increase with larger nodesize, it indicates underfitting. When nodesize is too large, the trees in the forest become too simple and lose the ability to capture important patterns in the data, leading to poor performance on test data.
+
+
