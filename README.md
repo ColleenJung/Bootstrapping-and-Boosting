@@ -9,6 +9,7 @@
 - [Challenges of Boosting](#challenges-of-boosting)
 - [XGBoosting vs Random Forest](#xgboosting-vs-randomforest)
 - [Fitting and Tuning Random Forests](#Fitting-and-Tuning-Random-Forests)
+- [Simulation Study](#Simulation-Study)
 
   
 ## 1. Bootstrapping
