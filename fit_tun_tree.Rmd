@@ -1,0 +1,203 @@
+---
+title: "Untitled"
+output: html_document
+---
+## Question 1: Fitting and Tuning Trees
+We will use the Social Network Ads data from HW 9. This time, we will use all three covariates: **age, gender and salary** to predict the **purchase outcome**. Fit a 5-fold cross-validation CART model and answer the following question:
+
+1.How large (# of terminal nodes) is the tree that gives the smallest cross-validation error?
+2.If we use the 1sd rule, obtain and plot the tree corresponding to that cp value.
+3.What is the first variable that is being used to split? and what is the splitting rule?
+4.Based on this plot, for a new subject with age 35, and salary 10,000, what is the predicted outcome?
+```{r}
+library(rpart)
+library(caret)
+library(readr)
+library(rpart.plot)
+```
+
+rpar model:Recursive Partitioning and Regression Trees
+```{r}
+SNAds <- read_csv("Desktop/UChicago/Notion_EDA/Social_Network_Ads.csv")
+head(Social_Network_Ads)
+```
+```{r}
+mod1 <- rpart(as.factor(Purchased)~ Gender +Age+EstimatedSalary, data=SNAds, control = rpart.control(xval = 5))
+summary(mod1)
+```
+The tree with 3 terminal nodes gives the smallest cross-validation error of expected loss=0.037
+```{r}
+rpart.plot(mod1)
+```
+Based on this plot, for a new subject with age 35, and salary 10,000, the predicted outcome is 0.
+
+## Question 2: Fitting and Tuning Random Forests
+The **goal** of this question is to learn how to read documentations of a new package yourself and be able to successfully implement it. The original randomForest package is a little bit slow computationally. There is a faster package ranger, however, it names the parameters slightly differently. Carefully read the ranger() function (starting from page 15) in this documentation, and figure out what are the corresponding parameter names for mtry and nodesize, and also read the caret package random forest related documentation here to find out how to specify the train() function and perform tuning using the ranger package. Then, complete the following tasks:
+
+package
+- 'ranger': A Fast Implementation of Random Forests
+- 'caret' : short for Classification And REgression Training
+
+
+```{r}
+library(readr)
+processed_cleveland <- read_csv("/Users/colleenjung/Desktop/UChicago/Notion_EDA/processed_cleveland.csv")
+```
+```{r}
+cleveland <-processed_cleveland 
+head(cleveland)
+```
+```{r}
+table(cleveland$cp)
+table(cleveland$thal)
+```
+
+
+1. Load the Cleveland Clinic Heart Disease Data from HW8. Process the outcome variable num so that num > 0 is labeled as 1, and 0 otherwise (this is the same as HW8).
+```{r}
+table(cleveland$num)
+cleveland$num <- ifelse(cleveland$num > 0, 1, 0)
+table(cleveland$num)
+cleveland$num = as.factor(cleveland$num>0)
+```
+
+2. For ca and thal, remove any observation that contains "?". Then convert both variables as factors. You want to consider using the as.factor() function.
+```{r}
+#'ca' and 'thal'
+cleveland = cleveland[which(cleveland$cp!="?" & cleveland$thal!="?"),]
+cleveland$cp = as.factor(cleveland$cp)
+cleveland$thal = as.factor(cleveland$thal)
+```
+
+
+3. Construct a grid of tuning parameters using expand.grid() with some mtry and min.node.size values. Pick 2 mtry values and 3 min.node.size values at your choice. In addition, the package requires you to specify a variable splitrule = "gini" in this grid.
+
+```{r}
+#Construct a grid of tuning parameters
+tuneGrid=expand.grid(.mtry = c(4,6), .min.node.size=c(5,10,15), .splitrule = "gini")
+```
+
+4. Construct trControl() to be 10 fold cross-validation
+```{r}
+trControl = trainControl(method = "cv", number = 10)
+```
+
+5. In your train() function, specify two arguments num.trees = 300 and respect.unordered.factors = "partition".
+
+```{r}
+#num.trees = 300 specifies that each Random Forest should have 300 trees.
+#mtry = the Number of Variable Splits in the first split.
+#nodesize or min.node.size = minimum number of observations to include in a terminal node
+
+mod2 = train(num~., data=cleveland, method = "ranger", 
+             tuneGrid = tuneGrid, trControl = trControl,
+             num.trees = 300,
+             respect.unordered.factors = "partition")
+mod2
+```
+```{r}
+plot(mod2)
+```
+
+
+6. What is the best tuning parameter? You may want to iterate your process to narrow down to a good range of tuning. The ranger package utilize multiple cores of your CPU. Hence you may do this process at your computer’s capacity.
+
+The best tuning parameter is 'mtry'=4, 'min.node.size'=10.
+
+
+7. Provide a statement to explain why we want to consider respect.unordered.factors = "partition", and how is it different from its default value.
+
+ 'respect.unordered.factors' = TRUE or FALSE should be based on the understanding of the data and the specific requirements of your analysis
+
+- When this parameter(respect.unordered.factors = "partition") is set to FALSE by default, 'ranger' package treats all string-valued variables as if they were ordered. 
+This means it doesn't spend time converting these categorical variables into dummy or indicator variables, treating them as numeric variables. 
+
+- This default setting works well when the categorical variables indeed have an ordered relationship with the outcome. However, treating these variables as ordered(categorical variables) might lead to a loss of information and potentially weaker model performance.
+
+- Alternative (respect.unordered.factors = TRUE):tells ranger to handle unordered factors properly by creating dummy variables. This can be more computationally expensive but allows the model to capture more complex relationships between categorical variables and the outcome. 
+
+- It's particularly important when the order of factor levels doesn't have a meaningful relationship with the response variable.
+
+- In this model, given that 'cp', 'thal' doesn't have a meaningful relationship with the outcome 'num', it might be more appropriate to set respect.unordered.factors = TRUE. This will allow the ranger model to more accurately capture the relationship between these categorical variables and the outcome, though at the cost of increased computational complexity.
+
+## Question 3: A Simulation Study
+
+We are going to use the following code to generate data and perform simulation studies to analyze the effect of nodesize. Note that this is a regression question and we are going to use the randomForest package to complete this question. Complete the following task:
+
+1. Setup a simulation study to analyze the performance of random forest. For the idea of simulation, please review HW4 and HW7. Use the following setting:
+- Your simulation should repeat nsim = 100 times
+- Within each simulation, you should generate training and testing data using the following code, and evaluate the prediction mean squared error of random forests
+- Set mtry = 1 and ntree = 300 for all simulations
+- Use a grid of nodesize values: c(1, 5, 10, 20, 30, 40)
+- Leave all other tuning parameters as default
+
+```{r}
+n = 200
+X = mvrnorm(n, c(0, 0), matrix(c(1, 0.5, 0.5, 1), 2, 2))
+y = rnorm(n, mean = X[,1] + X[,2])
+XTest = mvrnorm(n, c(0, 0), matrix(c(1, 0.5, 0.5, 1), 2, 2))
+yTest = rnorm(n, mean = XTest[,1] + XTest[,2])
+```
+
+```{r}
+library(MASS)
+library(randomForest)
+set.seed(1)
+nsim=100 #100 simulations will be run
+nodesizegrid=c(1, 5, 10, 20, 30, 40) #an array of different nodesize values to test in the Random Forest model
+errors=matrix(ncol=6,nrow=nsim) # matrix to store the MSE for each simulation and nodesize.
+
+
+for (i in 1:nsim){
+  n = 200
+  X = mvrnorm(n, c(0, 0), matrix(c(1, 0.5, 0.5, 1), 2, 2))
+  y = rnorm(n, mean = X[,1] + X[,2])
+  XTest = mvrnorm(n, c(0, 0), matrix(c(1, 0.5, 0.5, 1), 2, 2))
+  yTest = rnorm(n, mean = XTest[,1] + XTest[,2])
+  for (j in 1:6){
+    rf.fit = randomForest(X, y, ntree = 300, mtry = 1, nodesize = nodesizegrid[j])
+    pred=predict(rf.fit, XTest)
+    errors[i,j]=mean((pred-yTest)^2)
+  }
+}
+
+plot(nodesizegrid,colMeans(errors),xlab="nodesize",ylab="mse",type="l")
+```
+
+2. Make a plot of your grid of nodesize values against the averaged error across all simulations.
+
+```{r}
+# you may also simulate the data this way:
+
+for (i in 1:nsim){
+  
+  for (j in 1:6){  
+    n = 200
+    X = mvrnorm(n, c(0, 0), matrix(c(1, 0.5, 0.5, 1), 2, 2))
+    y = rnorm(n, mean = X[,1] + X[,2])
+    XTest = mvrnorm(n, c(0, 0), matrix(c(1, 0.5, 0.5, 1), 2, 2))
+    yTest = rnorm(n, mean = XTest[,1] + XTest[,2])
+
+    rf.fit = randomForest(X, y, ntree = 300, mtry = 1, nodesize = nodesizegrid[j])
+    pred = predict(rf.fit, XTest)
+    errors[i,j] = mean((pred-yTest)^2)
+  }
+}
+
+plot(nodesizegrid,colMeans(errors),xlab="nodesize",ylab="mse",type="l")
+```
+
+3. What do you observe on this plot? Can you explain why this is happening?
+
+- The code aims to assess how the nodesize parameter affects the performance of Random Forest models.
+- By regenerating the data for each nodesize within each simulation, the code offers a more robust assessment of the nodesize impact, accounting for variability in the dataset.
+
+- The plot is in U shape, the MSE is the smallest when nodesize=20. When we use a small nodesize, we are at the risk of over-fitting. This is similar to the 1NN example. When we use large nodesize, there could be under-fitting
+
+- Decreasing MSE with Increasing Nodesize (up to a point):
+
+If the plot shows a decrease in MSE as nodesize increases initially, it suggests that larger nodesize values are helping to reduce overfitting. Smaller nodesize allows trees to grow more complex and can lead to trees that are overly tailored to the training data, capturing noise rather than the underlying pattern.
+ 
+- Increasing MSE with Further Increase in Nodesize:
+
+Beyond a certain point, if the MSE starts to increase with larger nodesize, it indicates underfitting. When nodesize is too large, the trees in the forest become too simple and lose the ability to capture important patterns in the data, leading to poor performance on test data.
