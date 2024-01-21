@@ -106,9 +106,6 @@ The **“Gradient”** in “Gradient Boosting” refers to the fact that the al
 
 ## Fitting and Tuning Random Forests
   
-  <img width="556" alt="Screenshot 2024-01-21 at 4 34 30 PM" src="https://github.com/ColleenJung/Bootstrapping-and-Boosting/assets/119357849/bcec3243-3380-4a56-a9b1-367a3b2276fc">
-
-
 **R package**
 - 'ranger': A Fast Implementation of Random Forests
 - 'caret' : short for Classification And REgression Training
@@ -134,7 +131,20 @@ This means it doesn't spend time converting these categorical variables into dum
 
 - In this model, given that 'cp', 'thal' doesn't have a meaningful relationship with the outcome 'num', it might be more appropriate to set respect.unordered.factors = TRUE. This will allow the ranger model to more accurately capture the relationship between these categorical variables and the outcome, though at the cost of increased computational complexity.
 
+  <img width="556" alt="Screenshot 2024-01-21 at 4 34 30 PM" src="https://github.com/ColleenJung/Bootstrapping-and-Boosting/assets/119357849/bcec3243-3380-4a56-a9b1-367a3b2276fc">
 
+## Simulation Study 
+
+**Goal : perform simulation studies to analyze the effect of nodesize**
+
+- Your simulation should repeat nsim = 100 times
+- Within each simulation, you should generate training and testing data using the following code, and evaluate the prediction mean squared error of random forests
+- Set mtry = 1 and ntree = 300 for all simulations
+- Use a grid of nodesize values: c(1, 5, 10, 20, 30, 40)
+- Leave all other tuning parameters as default
+
+  <img width="556" alt="Screenshot 2024-01-21 at 4 34 30 PM" src="https://github.com/ColleenJung/Bootstrapping-and-Boosting/assets/119357849/bcec3243-3380-4a56-a9b1-367a3b2276fc">
+  
 The plot is in U shape, the MSE is the smallest when nodesize=20
 
 **Decreasing MSE with Increasing Nodesize (up to a point):**
